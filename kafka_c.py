@@ -41,16 +41,19 @@ def one_consumer():
             kb_lang = log_json['extra']['kb_lang']
             lang = log_json['extra']['lang']
             try:
-                sticker_id = log_json['extra']['sticker_id']
-            except:
-                sticker_id = log_json['extra']['item_id']
-            try:
-                tag = log_json['extra']['tag']
-            except:
                 try:
-                    tag = log_json['extra']['tags']
+                    sticker_id = log_json['extra']['sticker_id']
                 except:
-                    tag = log_json['extra']['key_word']
+                    sticker_id = log_json['extra']['item_id']
+                try:
+                    tag = log_json['extra']['tag']
+                except:
+                    try:
+                        tag = log_json['extra']['tags']
+                    except:
+                        tag = log_json['extra']['key_word']
+            except:
+                pass
             try:
                 position = str(ip_to_genhash(ip))
                 json_body = [{
