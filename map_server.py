@@ -21,6 +21,8 @@ popup_map = blueprints.Blueprint('map', url_prefix='/map')
 @popup_map.route("/")
 async def get_sessionId(request):
     data = get_map_data()
+    print('!!!!!!!!!!')
+    print(data)
     json_data = []
     for city, value in data:
         temp = []
