@@ -24,7 +24,10 @@ def get_url(id_data):
         try:
             url = json.loads(results[nu][0])['gif']['url']
         except:
-            url = json.loads(results[nu][0])['origin']['url']
+            try:
+                url = json.loads(results[nu][0])['origin']['url']
+            except:
+                url = 'https://i.pximg.net/c/100x100/img-master/img/2018/06/27/16/56/14/69426267_p0_master1200.jpg'
         city_url.append({'city_name': city_list[nu], 'url': url})
     connection.close()
     return city_url
