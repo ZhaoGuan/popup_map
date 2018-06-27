@@ -15,6 +15,7 @@ def get_url(id_data):
         city_list.append(city)
         sticker_ids += "'" + sticker_id + "',"
     sql_e = "SELECT data FROM t_resource WHERE id IN (%s)" % sticker_ids[:-1]
+    print(sql_e)
     cursor.execute(sql_e)
     results = cursor.fetchall()
     city_url = {}
