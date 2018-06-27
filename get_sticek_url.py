@@ -33,7 +33,6 @@ def get_url(id_data):
                 url = 'https://i.pximg.net/c/100x100/img-master/img/2018/06/27/16/56/14/69426267_p0_master1200.jpg'
         city_url.update({city_list[nu]: url})
     cursor.close()
-    connection.close()
     return city_url
 
 
