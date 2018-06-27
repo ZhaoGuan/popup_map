@@ -36,24 +36,21 @@ def one_consumer():
             log = '{' + str(msg[1].split(',{')[1].split('},')[0]) + '}' + '}'
             log = log.replace('\\', '')
             log = log.replace('"{', '{').replace('}"', '}')
-            # print(log)
+            print(log)
             log_json = json.loads(log)
+            kb_lang = log_json['extra']['kb_lang']
+            lang = log_json['extra']['lang']
             try:
-                kb_lang = log_json['extra']['kb_lang']
-                lang = log_json['extra']['lang']
-                try:
-                    sticker_id = log_json['extra']['sticker_id']
-                except:
-                    sticker_id = log_json['extra']['item_id']
-                try:
-                    tag = log_json['extra']['tag']
-                except:
-                    try:
-                        tag = log_json['extra']['tags']
-                    except:
-                        tag = log_json['extra']['key_word']
+                sticker_id = log_json['extra']['sticker_id']
             except:
-                pass
+                sticker_id = log_json['extra']['item_id']
+            try:
+                tag = log_json['extra']['tag']
+            except:
+                try:
+                    tag = log_json['extra']['tags']
+                except:
+                    tag = log_json['extra']['key_word']
             try:
                 position = str(ip_to_genhash(ip))
                 json_body = [{
