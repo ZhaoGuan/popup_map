@@ -19,7 +19,8 @@ def get_map_data():
         city_sticer.update({city_name: stticker_id})
     city_url = get_url(city_sticer)
     print(city_data)
-    for city_, city_url_ in city_url:
+    print(city_url)
+    for city_, city_url_ in city_url.items():
         print(city_)
         print(city_url_)
         city_data[city_].updata({'url': city_url_})
