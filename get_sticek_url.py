@@ -28,7 +28,10 @@ def get_url(id_data):
                 url = 'https://i.pximg.net/c/100x100/img-master/img/2018/06/27/16/56/14/69426267_p0_master1200.jpg'
         id_url.update({results[nu][0]: url})
     for city, sticker_id in id_data.items():
-        city_url.update({city: id_url[sticker_id]})
+        try:
+            city_url.update({city: id_url[sticker_id]})
+        except:
+            city_url.update({city: None})
     cursor.close()
     return city_url
 

@@ -18,7 +18,7 @@ def get_map_data():
             latitude = position['latitude']
             longitude = position['longitude']
             count = data['count']
-            if sticker_id in 'from':
+            if 'from' in sticker_id:
                 pass
             else:
                 city_data.update(
