@@ -23,7 +23,7 @@ def get_url(id_data):
         print(results[nu][0])
         try:
             url = json.loads(results[nu][0])['gif']['url']
-        except
+        except:
             url = json.loads(results[nu][0])['origin']['url']
         city_url.append({'city_name': city_list[nu], 'url': url})
     connection.close()
