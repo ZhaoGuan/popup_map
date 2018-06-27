@@ -7,19 +7,23 @@ import json
 
 def get_map_data():
     inflxdb_data = get_position_data()
-    print(inflxdb_data)
+    # print(inflxdb_data)
     city_data = {}
     city_sticker = {}
     for data in inflxdb_data:
-        position = json.loads(data['position'].replace("'", '"'))
-        city_name = position['city_name']
-        sticker_id = data['sticker_id']
-        latitude = position['latitude']
-        longitude = position['longitude']
-        count = data['count']
-        city_data.update(
-            {city_name: {'sticker_id': sticker_id, 'latitude': latitude, 'longitude': longitude, 'count': count}})
-        city_sticker.update({city_name: sticker_id})
+        try:
+            print(data['position'])
+            position = json.loads(data['position'].replace("'", '"'))
+            city_name = position['city_name']
+            sticker_id = data['sticker_id']
+            latitude = position['latitude']
+            longitude = position['longitude']
+            count = data['count']
+            city_data.update(
+                {city_name: {'sticker_id': sticker_id, 'latitude': latitude, 'longitude': longitude, 'count': count}})
+            city_sticker.update({city_name: sticker_id})
+        except:
+            pass
     print(city_data)
     print(city_sticker)
     city_url = get_url(city_sticker)
