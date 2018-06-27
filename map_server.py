@@ -21,7 +21,6 @@ popup_map = blueprints.Blueprint('map', url_prefix='/map')
 @popup_map.route("/")
 async def get_sessionId(request):
     data = get_map_data()
-    print(data)
     json_data = []
     for city, city_value in data.items():
         temp = []
@@ -39,6 +38,12 @@ async def get_sessionId(request):
 
 if __name__ == "__main__":
     app = Sanic()
-    # app.add_task(kafka_c.one_consumer())
+
+
+    async def back_task():
+        await kafka_c.one_consumer()
+
+
+    app.add_task(back_task())
     app.blueprint(popup_map, url_prefix='/map')
     app.run(host="0.0.0.0", port=8000)
