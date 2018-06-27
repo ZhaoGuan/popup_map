@@ -5,14 +5,16 @@ import geoip2.database
 import geohash
 from kafka import KafkaConsumer
 from influxdb import InfluxDBClient
+import os
 
+PATH = os.path.dirname(os.path.abspath(__file__))
 consumer = KafkaConsumer('emoji_appstore', bootstrap_servers='kika-data-gimbal0.intranet.com:9092',
                          group_id='Model_DashBoard')
 client = InfluxDBClient(host='0.0.0.0', port=8086, username='root', password='root', database='popup_geohash')
 
 
 def ip_to_genhash(ip):
-    with geoip2.database.Reader('./GeoIP2-City.mmdb') as reader:
+    with geoip2.database.Reader('./GeoLite2-City.mmdb') as reader:
         response = reader.city(ip)
         country = response.country.iso_code
         specific = response.subdivisions.most_specific.name
@@ -36,7 +38,7 @@ def one_consumer():
             log = '{' + str(msg[1].split(',{')[1].split('},')[0]) + '}' + '}'
             log = log.replace('\\', '')
             log = log.replace('"{', '{').replace('}"', '}')
-            print(log)
+            # print(log)
             try:
                 log_json = json.loads(log)
                 kb_lang = log_json['extra']['kb_lang']
@@ -54,6 +56,7 @@ def one_consumer():
                         tag = log_json['extra']['key_word']
             except:
                 pass
+            print(log_json)
             try:
                 position = str(ip_to_genhash(ip))
                 json_body = [{
