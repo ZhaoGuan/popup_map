@@ -17,7 +17,7 @@ def get_map_data():
         longitude = position['longitude']
         count = data['count']
         city_data.update(
-            {city_name: {'stticker_id': stticker_id, 'latitude': latitude, 'longitude': longitude, 'count': count}})
+            {city_name: {'sticker_id': stticker_id, 'latitude': latitude, 'longitude': longitude, 'count': count}})
         city_sticer.update({city_name: stticker_id})
     city_url = get_url(city_sticer)
     # print(city_data)
