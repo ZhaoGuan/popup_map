@@ -21,11 +21,11 @@ def ip_to_genhash(ip):
         latitude = response.location.latitude
         longitude = response.location.longitude
         city_name = response.city.name
-        print(country)
-        print(specific)
-        print(city_name)
+        # print(country)
+        # print(specific)
+        # print(city_name)
         g_hash = geohash.encode(latitude, longitude)
-        print(g_hash)
+        # print(g_hash)
         result = {'g_hash': g_hash, 'city_name': city_name, 'latitude': latitude, 'longitude': longitude}
     return result
 
@@ -56,7 +56,7 @@ def one_consumer():
                         tag = log_json['extra']['key_word']
             except:
                 pass
-            print(log_json)
+            # print(log_json)
             try:
                 position = str(ip_to_genhash(ip))
                 json_body = [{

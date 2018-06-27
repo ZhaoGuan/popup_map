@@ -30,13 +30,16 @@ async def get_sessionId(request):
         temp.append(city_value['longitude'])
         temp.append(city_value['latitude'])
         temp.append(city_value['count'])
-        temp.append(city_value['url'])
+        try:
+            temp.append(city_value['url'])
+        except:
+            temp.append(None)
         json_data.append(temp)
     return sanic_json({'status': 0, "data": []})
 
 
 if __name__ == "__main__":
     app = Sanic()
-    # app.add_task(kafka_c.one_consumer())
+    app.add_task(kafka_c.one_consumer())
     app.blueprint(popup_map, url_prefix='/map')
     app.run(host="0.0.0.0", port=8000)
