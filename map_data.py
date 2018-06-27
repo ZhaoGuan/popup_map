@@ -23,7 +23,7 @@ def get_map_data():
     for city_, city_url_ in city_url.items():
         print(city_)
         print(city_url_)
-        city_data[city_].updata({'url': city_url_})
+        city_data[city_].update({'url': city_url_})
     return city_data
 
 
