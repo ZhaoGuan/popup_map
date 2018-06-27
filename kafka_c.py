@@ -30,7 +30,7 @@ def ip_to_genhash(ip):
     return result
 
 
-async def one_consumer():
+def one_consumer():
     for msg in consumer:
         if '"iid":"send"' in str(msg):
             msg = str(msg).split(',,')

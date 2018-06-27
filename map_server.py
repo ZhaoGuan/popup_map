@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
 
     async def back_task():
-        await kafka_c.one_consumer()
+        kafka_c.one_consumer()
 
 
     app.add_task(back_task())
