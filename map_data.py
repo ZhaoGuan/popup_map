@@ -12,7 +12,6 @@ def get_map_data():
     city_sticker = {}
     for data in inflxdb_data:
         try:
-            print(data['position'])
             position = json.loads(data['position'].replace("'", '"'))
             city_name = position['city_name']
             sticker_id = data['sticker_id']
@@ -24,14 +23,12 @@ def get_map_data():
             city_sticker.update({city_name: sticker_id})
         except:
             pass
-    print(city_data)
-    print(city_sticker)
-    city_url = get_url(city_sticker)
     # print(city_data)
-    # print(city_url)
+    # print(city_sticker)
+    city_url = get_url(city_sticker)
+    print(len(list(city_url.keys())))
+    print(len(list(city_data.keys())))
     for city_, city_url_ in city_url.items():
-        # print(city_)
-        # print(city_url_)
         city_data[city_].update({'url': city_url_})
     return city_data
 

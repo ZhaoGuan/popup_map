@@ -15,21 +15,17 @@ def get_url(id_data):
         city_list.append(city)
         sticker_ids += "'" + sticker_id + "',"
     sql_e = "SELECT data FROM t_resource WHERE id IN (%s)" % sticker_ids[:-1]
-    print(sql_e)
     cursor.execute(sql_e)
     results = cursor.fetchall()
     city_url = {}
     number = len(results)
     for nu in range(number):
-        print(results[nu][0])
         try:
             url = json.loads(results[nu][0])['gif']['url']
         except:
             try:
                 url = json.loads(results[nu][0])['origin']['url']
             except:
-                print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-                print(results[nu])
                 url = 'https://i.pximg.net/c/100x100/img-master/img/2018/06/27/16/56/14/69426267_p0_master1200.jpg'
         city_url.update({city_list[nu]: url})
     cursor.close()
