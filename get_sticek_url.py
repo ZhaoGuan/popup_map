@@ -20,8 +20,8 @@ def get_url(id_data):
     city_url = []
     number = len(results)
     for nu in range(number):
+        print(results[nu][0])
         url = json.loads(results[nu][0])['gif']['url']
-        print(url)
         city_url.append({'city_name': city_list[nu], 'url': url})
     connection.close()
     return city_url
