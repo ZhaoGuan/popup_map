@@ -24,13 +24,13 @@ async def get_sessionId(request):
     print('!!!!!!!!!!')
     print(data)
     json_data = []
-    for city, value in data:
+    for city, city_value in data:
         temp = []
         temp.append(city)
-        temp.append(value['longitude'])
-        temp.append(value['latitude'])
-        temp.append(value['count'])
-        temp.append(value['url'])
+        temp.append(city_value['longitude'])
+        temp.append(city_value['latitude'])
+        temp.append(city_value['count'])
+        temp.append(city_value['url'])
         json_data.append(temp)
     return sanic_json({'status': 0, "data": []})
 
