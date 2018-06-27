@@ -27,6 +27,7 @@ def get_map_data():
     # print(city_sticker)
     city_url = get_url(city_sticker)
     print(len(list(city_url.keys())))
+    print(len(list(city_sticker.keys())))
     print(len(list(city_data.keys())))
     for city_, city_url_ in city_url.items():
         city_data[city_].update({'url': city_url_})
