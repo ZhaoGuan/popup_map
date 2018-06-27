@@ -17,7 +17,7 @@ cache_regions.update({
 popup_map = blueprints.Blueprint('map', url_prefix='/map')
 
 
-@cache_region('memory')
+# @cache_region('memory')
 @popup_map.route("/")
 async def get_sessionId(request):
     data = get_map_data()
