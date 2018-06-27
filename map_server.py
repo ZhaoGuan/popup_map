@@ -24,7 +24,7 @@ async def get_sessionId(request):
     print('!!!!!!!!!!')
     print(data)
     json_data = []
-    for city, city_value in data:
+    for city, city_value in data.items():
         temp = []
         temp.append(city)
         temp.append(city_value['longitude'])
