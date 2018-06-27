@@ -21,7 +21,10 @@ def get_url(id_data):
     number = len(results)
     for nu in range(number):
         print(results[nu][0])
-        url = json.loads(results[nu][0])['gif']['url']
+        try:
+            url = json.loads(results[nu][0])['gif']['url']
+        except
+            url = json.loads(results[nu][0])['origin']['url']
         city_url.append({'city_name': city_list[nu], 'url': url})
     connection.close()
     return city_url
