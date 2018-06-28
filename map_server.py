@@ -19,7 +19,7 @@ popup_map = blueprints.Blueprint('map', url_prefix='/map')
 
 @cache_region('memory')
 @popup_map.route("/data")
-async def get_sessionId(request):
+async def get_sessionId(request, callback):
     data = get_map_data()
     json_data = []
     for city, city_value in data.items():
@@ -33,7 +33,7 @@ async def get_sessionId(request):
         except:
             temp.append(None)
         json_data.append(temp)
-    print(request.json)
+    print(callback)
     return sanic_json({'status': 0, "data": str(json_data)})
 
 
