@@ -33,7 +33,8 @@ async def get_sessionId(request):
         except:
             temp.append(None)
         json_data.append(temp)
-    return sanic_json({'status': 0, "data": json_data})
+    print(request.json)
+    return sanic_json({'status': 0, "data": str(json_data)})
 
 
 if __name__ == "__main__":
