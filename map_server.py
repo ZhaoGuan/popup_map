@@ -29,14 +29,15 @@ async def get_sessionId(request):
     return sanic_json({'status': 0, "data": json_data})
 
 
-@popup_map.route("/popup")
-async def get_sessionId(request):
-    html_map = get_map()
-    return sanic_html(html_map)
+# @popup_map.route("/popup")
+# async def get_sessionId(request):
+#     html_map = get_map()
+#     return sanic_html(html_map)
 
 
 if __name__ == "__main__":
     app = Sanic()
     CORS(app)
+    app.static('/popup', './html')
     app.blueprint(popup_map, url_prefix='/map')
     app.run(host="0.0.0.0", port=8000)
