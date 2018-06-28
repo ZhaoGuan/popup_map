@@ -127,9 +127,9 @@ function updateChart (rawData) {
                 activeOpacity: 1,
                 symbolSize: function (data) {
                     if (data[2] > 500) {
-                        return Math.min(25, 8 + (data[2] - 500) / 100);
+                        return Math.min(25, 9 + (data[2] - 500) / 100);
                     } else if (data[2] <= 500 && data[2] > 200) {
-                        return 6;
+                        return 8;
                     } else if (data[2] <= 200 && data[2] > 10) {
                         return 4;
                     } else {
