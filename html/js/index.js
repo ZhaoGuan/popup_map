@@ -26,7 +26,7 @@ function makeMapData(rawData) {
     var mapData = [];
     for (var i = 0; i < rawData.length; i++) {
         var isShow = false;
-        if (Math.random() > 0.999) {
+        if (Math.random() > 0.7) {
             isShow = true;
         }
         var url = rawData[i][4];
