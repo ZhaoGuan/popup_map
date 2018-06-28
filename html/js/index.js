@@ -63,10 +63,12 @@ function updateChart (rawData) {
     option = {
         backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 0.4, [{
             offset: 0,
-            color: '#4b5769'
+//            color: '#4b5769'
+            color: '#3b444b'
         }, {
             offset: 1,
-            color: '#404a59'
+//            color: '#404a59'
+            color: '#3b444b'
         }]),
         title: {
             text: 'Popup',
@@ -80,6 +82,7 @@ function updateChart (rawData) {
         },
         visualMap: {
             color: ['#d94e5d','#f2c96d','#49e413'],
+//            color: ['#d94e5d','#ff66cc','#49e413'],
             textStyle: {
                 color: '#555'
             },
@@ -108,8 +111,10 @@ function updateChart (rawData) {
             itemStyle: {
                 normal: {
                     borderWidth: 0.2,
-                    borderColor: '#404a59',
-                    areaColor: '#a1bda3'
+//                    borderColor: '#404a59',
+                    borderColor: '#778899',
+//                    areaColor: '#a1bda3'
+                    areaColor: '#000000'
                 }
             },
             roam: true
@@ -148,7 +153,7 @@ function updateChart (rawData) {
         var data = makeMapData(rawData);
         option.series[0].data = data;
         myChart.setOption(option);
-    }, 20000)
+    }, 20 * 1000)
 }
 window.onresize = function () {
     if (myChart) {
