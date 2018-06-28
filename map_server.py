@@ -33,9 +33,10 @@ async def get_sessionId(request):
         except:
             temp.append(None)
         json_data.append(temp)
-    print(request.args.get('callback'))
+    # print(request.args.get('callback'))
     callback = request.args.get('callback')
-    return sanic_json({'status': 0, "data": callback + '(' + str(json_data) + ')'})
+    # return sanic_json({'status': 0, "data": callback + '(' + str(json_data) + ')'})
+    return sanic_json({'status': 0, "data": json_data})
 
 
 if __name__ == "__main__":
