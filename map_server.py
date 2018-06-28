@@ -13,7 +13,7 @@ cache_regions.update({
         'type': 'memory'
     }
 })
-popup_map = blueprints.Blueprint('map', url_prefix='/map')
+popup_map = blueprints.Blueprint('map', url_prefix='/map_data')
 
 
 @cache_region('memory')
@@ -37,12 +37,5 @@ async def get_sessionId(request):
 
 if __name__ == "__main__":
     app = Sanic()
-
-
-    async def back_task():
-        await kafka_c.one_consumer()
-
-
-    app.add_task(back_task())
     app.blueprint(popup_map, url_prefix='/map')
     app.run(host="0.0.0.0", port=8000)
