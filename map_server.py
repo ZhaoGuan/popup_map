@@ -2,9 +2,10 @@
 # __author__ = 'Gz'
 from sanic import Sanic
 from sanic.response import json as sanic_json
+from sanic.response import html as sanic_html
 from sanic import blueprints
 from beaker.cache import cache_regions, cache_region
-from map_data import get_map_data
+from map_data import get_map_data, get_map
 from sanic_cors import CORS, cross_origin
 
 popup_map = blueprints.Blueprint('map', url_prefix='/map')
@@ -26,6 +27,12 @@ async def get_sessionId(request):
             temp.append(None)
         json_data.append(temp)
     return sanic_json({'status': 0, "data": json_data})
+
+
+@popup_map.route("/popup")
+async def get_sessionId(request):
+    html_map = get_map()
+    return sanic_html(html_map)
 
 
 if __name__ == "__main__":

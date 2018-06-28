@@ -9,8 +9,13 @@ cache_regions.update({
     'memory': {
         'expire': 300,
         'type': 'memory'
+    },
+    'html_memory': {
+        'expire': 3600,
+        'type': 'memory'
     }
 })
+
 
 @cache_region('memory')
 def get_map_data():
@@ -41,6 +46,12 @@ def get_map_data():
     for city_, city_url_ in city_url.items():
         city_data[city_].update({'url': city_url_})
     return city_data
+
+
+@cache_region('html_memory')
+def get_map():
+    with open('./html/index.html') as html:
+        return html
 
 
 if __name__ == '__main__':
