@@ -5,7 +5,7 @@ from sanic.response import json as sanic_json
 from sanic.response import html as sanic_html
 from sanic import blueprints
 from beaker.cache import cache_regions, cache_region
-from map_data import get_map_data, get_map
+from map_data import get_map_data
 from sanic_cors import CORS, cross_origin
 
 popup_map = blueprints.Blueprint('map', url_prefix='/map')
