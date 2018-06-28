@@ -4,7 +4,6 @@ from sanic import Sanic
 from sanic.response import json as sanic_json
 from sanic import blueprints
 from beaker.cache import cache_regions, cache_region
-import kafka_c
 from map_data import get_map_data
 from sanic_cors import CORS, cross_origin
 
@@ -33,9 +32,6 @@ async def get_sessionId(request):
         except:
             temp.append(None)
         json_data.append(temp)
-    # print(request.args.get('callback'))
-    callback = request.args.get('callback')
-    # return sanic_json({'status': 0, "data": callback + '(' + str(json_data) + ')'})
     return sanic_json({'status': 0, "data": json_data})
 
 
