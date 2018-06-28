@@ -26,9 +26,7 @@ function makeMapData(rawData) {
     var mapData = [];
     for (var i = 0; i < rawData.length; i++) {
         var isShow = false;
-        if (rawData[i][1] < 10) {
-            isShow = false;
-        } else if (Math.random() > 0.9) {
+        if (Math.random() > 0.99) {
             isShow = true;
         }
         var url = rawData[i][4];
@@ -150,7 +148,7 @@ function updateChart (rawData) {
         var data = makeMapData(rawData);
         option.series[0].data = data;
         myChart.setOption(option);
-    }, 5000)
+    }, 20000)
 }
 window.onresize = function () {
     if (myChart) {

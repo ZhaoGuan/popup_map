@@ -7,7 +7,7 @@ from beaker.cache import cache_regions, cache_region
 
 cache_regions.update({
     'memory': {
-        'expire': 300,
+        'expire': 60,
         'type': 'memory'
     },
     'html_memory': {
@@ -48,22 +48,5 @@ def get_map_data():
     return city_data
 
 
-@cache_region('html_memory')
-def get_map():
-    with open('./html/index.html') as html:
-        return html.read()
-
-@cache_region('html_memory')
-def get_map():
-    with open('./html/index.html') as html:
-        return html.read()
-@cache_region('html_memory')
-def get_map():
-    with open('./html/index.html') as html:
-        return html.read()
-@cache_region('html_memory')
-def get_map():
-    with open('./html/index.html') as html:
-        return html.read()
 if __name__ == '__main__':
     print(get_map_data())
