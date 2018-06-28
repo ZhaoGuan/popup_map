@@ -5,7 +5,7 @@ getData();
 var popPictureInterval;
 setInterval(function () {
     getData();
-}, 5 * 60 * 1000);
+}, 60 * 1000);
 
 function getData() {
     $.ajax({
@@ -153,7 +153,7 @@ function updateChart (rawData) {
         var data = makeMapData(rawData);
         option.series[0].data = data;
         myChart.setOption(option);
-    }, 20 * 1000)
+    }, 5 * 1000)
 }
 window.onresize = function () {
     if (myChart) {
