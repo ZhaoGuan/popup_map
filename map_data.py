@@ -12,7 +12,6 @@ cache_regions.update({
     }
 })
 
-
 @cache_region('memory')
 def get_map_data():
     inflxdb_data = get_position_data()
