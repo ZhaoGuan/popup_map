@@ -25,7 +25,7 @@ def get_url(id_data):
             try:
                 url = json.loads(results[nu][1])['origin']['url']
             except:
-                url = 'https://i.pximg.net/c/100x100/img-master/img/2018/06/27/16/56/14/69426267_p0_master1200.jpg'
+                url = 'http://cdn.kikakeyboard.com/picture/53668905e61e94acdb9bbe1d747e874e.gif'
         id_url.update({results[nu][0]: url})
     for city, sticker_id in id_data.items():
         try:
