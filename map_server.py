@@ -6,6 +6,7 @@ from sanic import blueprints
 from beaker.cache import cache_regions, cache_region
 import kafka_c
 from map_data import get_map_data
+from sanic_cors import CORS, cross_origin
 
 cache_regions.update({
     'memory': {
@@ -37,5 +38,6 @@ async def get_sessionId(request):
 
 if __name__ == "__main__":
     app = Sanic()
+    CORS(app)
     app.blueprint(popup_map, url_prefix='/map')
     app.run(host="0.0.0.0", port=8000)
