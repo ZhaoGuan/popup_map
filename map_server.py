@@ -3,21 +3,20 @@
 from sanic import Sanic
 from sanic.response import json as sanic_json
 from sanic import blueprints
-import json
 from beaker.cache import cache_regions, cache_region
 import kafka_c
 from map_data import get_map_data
 
 cache_regions.update({
     'memory': {
-        'expire': 600,
+        'expire': 300,
         'type': 'memory'
     }
 })
 popup_map = blueprints.Blueprint('map', url_prefix='/map')
 
 
-# @cache_region('memory')
+@cache_region('memory')
 @popup_map.route("/")
 async def get_sessionId(request):
     data = get_map_data()
@@ -41,7 +40,7 @@ if __name__ == "__main__":
 
 
     async def back_task():
-        kafka_c.one_consumer()
+        await kafka_c.one_consumer()
 
 
     app.add_task(back_task())

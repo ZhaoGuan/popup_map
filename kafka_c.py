@@ -21,11 +21,11 @@ def ip_to_genhash(ip):
         latitude = response.location.latitude
         longitude = response.location.longitude
         city_name = response.city.name
-        # print(country)
-        # print(specific)
-        # print(city_name)
+        print(country)
+        print(specific)
+        print(city_name)
         g_hash = geohash.encode(latitude, longitude)
-        # print(g_hash)
+        print(g_hash)
         result = {'g_hash': g_hash, 'city_name': city_name, 'latitude': latitude, 'longitude': longitude}
     return result
 
@@ -38,25 +38,21 @@ def one_consumer():
             log = '{' + str(msg[1].split(',{')[1].split('},')[0]) + '}' + '}'
             log = log.replace('\\', '')
             log = log.replace('"{', '{').replace('}"', '}')
-            # print(log)
             try:
                 log_json = json.loads(log)
                 kb_lang = log_json['extra']['kb_lang']
                 lang = log_json['extra']['lang']
-                try:
-                    sticker_id = log_json['extra']['sticker_id']
-                except:
-                    sticker_id = log_json['extra']['item_id']
-                try:
-                    tag = log_json['extra']['tag']
-                except:
-                    try:
-                        tag = log_json['extra']['tags']
-                    except:
-                        tag = log_json['extra']['key_word']
+                sticker_id = log_json['extra'].get("sticker_id", log_json['extra'].get('item_id'))
+                tag = log_json['extra'].get('tag', log_json['extra'].get('tags', log_json['extra']['key_word']))
+                # try:
+                #     tag = log_json['extra']['tag']
+                # except:
+                #     try:
+                #         tag = log_json['extra'].get('tag',log_json['extra'].get('tags',log_json['extra']['key_word']))
+                #     except:
+                #         tag = log_json['extra']['key_word']
             except:
                 pass
-            # print(log_json)
             try:
                 position = str(ip_to_genhash(ip))
                 json_body = [{
