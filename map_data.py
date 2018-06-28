@@ -50,8 +50,8 @@ def get_map_data():
 
 @cache_region('html_memory')
 def get_map():
-    html_data = open('./html/index.html')
-    return html_data
+    with open('./html/index.html') as html:
+        return html.read()
 
 
 if __name__ == '__main__':
