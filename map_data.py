@@ -3,8 +3,17 @@
 from get_inflxdb_data import get_position_data
 from get_sticek_url import get_url
 import json
+from beaker.cache import cache_regions, cache_region
+
+cache_regions.update({
+    'memory': {
+        'expire': 300,
+        'type': 'memory'
+    }
+})
 
 
+@cache_region('memory')
 def get_map_data():
     inflxdb_data = get_position_data()
     city_data = {}

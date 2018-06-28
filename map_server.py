@@ -7,16 +7,9 @@ from beaker.cache import cache_regions, cache_region
 from map_data import get_map_data
 from sanic_cors import CORS, cross_origin
 
-cache_regions.update({
-    'memory': {
-        'expire': 300,
-        'type': 'memory'
-    }
-})
 popup_map = blueprints.Blueprint('map', url_prefix='/map')
 
 
-@cache_region('memory')
 @popup_map.route("/data")
 async def get_sessionId(request):
     data = get_map_data()
