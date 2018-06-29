@@ -21,12 +21,82 @@ function getData() {
         }
     })
 }
+function makeSeries(rawData) {
+    var len = rawData.length;
+    var seriesData = [];
+    var count = Math.ceil(len / 2000);
+    for (var j = 0; j < count; j++) {
+        var start = 2000 * j;
+        var end = 2000 * (j + 1);
+        if (end > len) {
+            end = len;
+        }
+        var mapData = [];
+        for (var i = start; i < end; i++) {
+            var isShow = false;
+            if (Math.random() > 0.99) {
+                isShow = true;
+            }
+            var url = rawData[i][4];
+            mapData.push({
+                name: rawData[i][0],
+                value: rawData[i].slice(1, 4),
+                label: {
+                    normal: {
+                        show: isShow,
+                        formatter: function () {
+                            return '{bg|}';
+                        },
+                        rich: {
+                            bg: {
+                                height: 50,
+                                backgroundColor: {
+                                    image: url
+                                },
+                                position:'top'
+                            }
+                        }
+                    },
+                    emphasis: {
+                        show: true
+                    }
 
+                }
+            });
+        }
+        seriesData.push(
+        {
+            name: 'Prices and Earnings 2012',
+                type: 'scatter',
+            coordinateSystem: 'geo',
+            symbolSize: 8,
+            data: mapData,
+            activeOpacity: 1,
+            symbolSize: function (data) {
+                if (data[2] > 500) {
+                    return Math.min(25, 9 + (data[2] - 500) / 100);
+                } else if (data[2] <= 500 && data[2] > 200) {
+                    return 8;
+                } else if (data[2] <= 200 && data[2] > 10) {
+                    return 4;
+                } else {
+                    return 4;
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#577ceb'
+                }
+            }
+        })
+    }
+    return seriesData;
+}
 function makeMapData(rawData) {
     var mapData = [];
-    for (var i = 0; i < rawData.length; i++) {
+    for (var i = 0; i < 2000; i++) {
         var isShow = false;
-        if (Math.random() > 0.95) {
+        if (Math.random() > 0.99) {
             isShow = true;
         }
         var url = rawData[i][4];
@@ -58,7 +128,6 @@ function makeMapData(rawData) {
     }
     return mapData;
 };
-
 function updateChart (rawData) {
     option = {
         backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 0.4, [{
@@ -118,40 +187,13 @@ function updateChart (rawData) {
                 }
             },
             roam: true
-            // regions: coldata
         },
-        series: [
-            {
-                name: 'Prices and Earnings 2012',
-                type: 'scatter',
-                coordinateSystem: 'geo',
-                symbolSize: 8,
-                data: makeMapData(rawData),
-                activeOpacity: 1,
-                symbolSize: function (data) {
-                    if (data[2] > 500) {
-                        return Math.min(25, 9 + (data[2] - 500) / 100);
-                    } else if (data[2] <= 500 && data[2] > 200) {
-                        return 8;
-                    } else if (data[2] <= 200 && data[2] > 10) {
-                        return 4;
-                    } else {
-                        return 4;
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#577ceb'
-                    }
-                }
-            }
-        ]
+        series: makeSeries(rawData)
     };
     clearInterval(popPictureInterval);
     myChart.setOption(option);
     popPictureInterval = setInterval(function () {
-        var data = makeMapData(rawData);
-        option.series[0].data = data;
+        option.series = makeSeries(rawData);
         myChart.setOption(option);
     }, 2 * 1000)
 }
